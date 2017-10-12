@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "tester.ours.com.helloworld"
+        minSdkVersion 23
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+//
+configurations {
+    paranamer
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+
+    //Add paranamer-ant jar as external; library
+    compile files('libs/paranamer-ant-2.8.jar')
+
+    //Add paranamer jar as app module dependency
+    compile project(':paranamer-2.8')
+
+    //Add paranmer taskdef class
+    paranamer 'com.thoughtworks.paranamer:paranamer-ant:2.8'
+}
+//Integrate paranmer ant as a gradle task
+//this does the work. An additional tast to `CompileJava` . this will call paranamer-ant jar
+//which modifies our class files and add __PARANAMER_DATA as class variable.
+tasks.withType(JavaCompile) {
+    it.doLast {
+        ant.taskdef name: 'paranamer',
+                classname: 'com.thoughtworks.paranamer.ant.ParanamerTask',
+                classpath: configurations.paranamer.asPath
+        ant.paranamer(classdir: destinationDir) {
+            source.addToAntBuilder ant, 'fileset', FileCollection.AntType.FileSet
+        }
+    }
+}

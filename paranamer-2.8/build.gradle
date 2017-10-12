@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('paranamer-2.8.jar'))

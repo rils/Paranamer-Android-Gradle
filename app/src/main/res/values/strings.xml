@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hello World</string>
+    <string name="lookup">Lookup</string>
+    <string name="user_greeting">hola</string>
+</resources>
