@@ -7,7 +7,7 @@ import android.util.Log;
  * Sample class to demonstrate paranamer fetching parameter names
  */
 
-class Test {
+class SampleClassTest {
     public void testMethod(int parameter1, boolean parameter2) {
         Log.i("paranamer", "method1");
     }

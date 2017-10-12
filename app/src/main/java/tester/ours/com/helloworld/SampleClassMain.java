@@ -7,7 +7,7 @@ import android.util.Log;
  * Sample class to demonstrate paranmer
  */
 
-class Testing {
+class SampleClassMain {
     public void method1(int parameter1, boolean parameter2) {
         Log.i("paranmer", "method1");
     }

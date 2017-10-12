@@ -17,7 +17,7 @@ import java.util.Arrays;
  * Call  test class by instrumentaion as shown below
  * adb shell am instrument -w -r   -e debug true -e class tester.ours.com.helloworld.ExampleInstrumentedTest#test tester.ours.com.helloworld.test/android.support.test.runner.AndroidJUnitRunner
  *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * @see <a href="http://d.android.com/tools/testing">SampleClassMain documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
@@ -30,7 +30,7 @@ public class ExampleInstrumentedTest {
         StringBuilder methods = new StringBuilder();
         Paranamer paranamer = new CachingParanamer();
         try {
-            String cl_str = Test.class.getName();
+            String cl_str = SampleClassTest.class.getName();
 
             Class<?> c;
             c = Class.forName(cl_str);

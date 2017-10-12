@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder method_data = new StringBuilder();
         Paranamer paranamer = new CachingParanamer();
         try {
-            String cl_str = Testing.class.getName();
+            String cl_str = SampleClassMain.class.getName();
 
             Class<?> c;
             c = Class.forName(cl_str);
